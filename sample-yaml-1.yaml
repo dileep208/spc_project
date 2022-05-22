@@ -1,0 +1,14 @@
+all:
+  hosts:
+    192.168.10.11
+  children:
+    webserver:
+      hosts:
+        web1.dileep.com
+        web2.dileep.com
+    dbserver:
+      hosts:
+        db1.dileep.com
+        db2.dileep.com
+        
+      

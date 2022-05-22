@@ -1,0 +1,13 @@
+192.168.1.0
+
+[webserver]
+web1.dileep.com
+web2.dileep.com
+
+[dbserver]
+db1.dileep.com
+db2.dileep.com
+
+[appserver]
+app1.dileep.com
+app2.dileep.com

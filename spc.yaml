@@ -1,0 +1,53 @@
+---
+- name: deploying springboot as linux service
+  hosts: appserver
+  become: yes
+  vars:
+    java_package: openjdk-11-jdk
+    app_dir: /usr/share/springpetclinic
+    app_download_url: https://referenceapplicationskhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
+    app_filename:  /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
+    app_username: springbootuser
+  tasks:
+    - name: display the java package
+      debug:
+        var: java_package
+    - name: Checking variables var1
+      debug:
+        var: test_var1
+    - name: Checking variables var2
+      debug:
+        var: test_var2
+    - name: Updating the packages and installing java
+      apt:
+        name: "{{ java_package }}"
+        update_cache: yes
+        state: present
+    - name: Creating a Springpetclinic direcrtory
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+    - name: Downloading the springpetclinic application
+      get_url:
+        url: "{{  app_download_url }}"
+        dest: "{{ app_filename }}"
+    - name: Creating a Springbootuser
+      user:
+        name: "{{ app_username }}"
+        password: "{{ app_username }}"
+        state: present
+    - name: Chage the Ownership of the file
+      file:
+        path: "{{ app_filename }}"
+        owner: "{{ app_username }}"
+        mode: '500'
+        state: file
+    - name: copying the service file
+      copy:
+        dest: /etc/systemd/system/springpetclinic.service
+        src: springpetclinic.service
+    - name: for enabling and starting the application
+      systemd:
+        name: springpetclinic.service
+        enabled: yes
+        state: started

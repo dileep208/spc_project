@@ -12,6 +12,9 @@
         name: "{{ java_package }}"
         update_cache: yes
         state: present
+    - name: debug message for java
+      debug:
+        msg: "java with package {{ java_package }} is installed right now"
     - name: Creating a Springpetclinic direcrtory
       file:
         path: "{{ app_dir }}"

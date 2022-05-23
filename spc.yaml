@@ -7,20 +7,22 @@
       fail:
         msg: This playbook only works for ubuntu and Amazon distributions. Support for other distribution will be added soon.
       when: ansible_facts['distribution'] != "Ubuntu" and ansible_facts['distribution'] != "Amazon"
-    - name: Updating the packages and installing java
-      apt:
+    # - name: Updating the packages and installing java
+    #   apt:
+    - name: install java
+      package:    
         name: "{{ java_package }}"
-        update_cache: yes
+        # update_cache: yes
         state: present
       notify:
         - debug message for java
-      when: ansible_facts['distribution'] == "Ubuntu"
+      # when: ansible_facts['distribution'] == "Ubuntu"
 
-    - name: Install java on Amazon
-      yum:
-        name: "{{ java_package_amazon }}"
-        state: present
-      when: ansible_facts['distribution'] == "Amazon"  
+    # - name: Install java on Amazon
+    #   yum:
+    #     name: "{{ java_package_amazon }}"
+    #     state: present
+    #   when: ansible_facts['distribution'] == "Amazon"  
       
     - name: Creating a Springpetclinic direcrtory
       file:

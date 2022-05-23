@@ -6,7 +6,7 @@
     - name: Fail the execution when it is not Ubuntu and CentOS!!
       fail:
         msg: This playbook only works for ubuntu and centos distributions. Support for other distribution will be added soon.
-      when: ansible_facts['distribution'] != "Ubuntu" and ansible_facts['distribution'] != CentOS
+      when: ansible_facts['distribution'] != "Ubuntu" and ansible_facts['distribution'] != "CentOS"
     - name: Updating the packages and installing java
       apt:
         name: "{{ java_package }}"

@@ -1,0 +1,2 @@
+[local]
+mydreammachine.dileep.com ansible_host=localhost

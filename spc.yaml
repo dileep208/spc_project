@@ -3,10 +3,10 @@
   hosts: appserver
   become: yes
   tasks:
-    - name: Fail the execution when it is not Ubuntu and CentOS!!
+    - name: Fail the execution when it is not Ubuntu and Amazon!!
       fail:
-        msg: This playbook only works for ubuntu and centos distributions. Support for other distribution will be added soon.
-      when: ansible_facts['distribution'] != "Ubuntu" and ansible_facts['distribution'] != "CentOS"
+        msg: This playbook only works for ubuntu and Amazon distributions. Support for other distribution will be added soon.
+      when: ansible_facts['distribution'] != "Ubuntu" and ansible_facts['distribution'] != "Amazon"
     - name: Updating the packages and installing java
       apt:
         name: "{{ java_package }}"
@@ -20,7 +20,7 @@
       apt:
         name: "{{ java_package }}"
         state: present
-      when: ansible_facts['distribution'] == "CentOS"  
+      when: ansible_facts['distribution'] == "Amazon"  
       
     - name: Creating a Springpetclinic direcrtory
       file:

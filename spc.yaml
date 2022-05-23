@@ -17,7 +17,7 @@
       when: ansible_facts['distribution'] == "Ubuntu"
 
     - name: Install java on Amazon
-      apt:
+      yum:
         name: "{{ java_package }}"
         state: present
       when: ansible_facts['distribution'] == "Amazon"  

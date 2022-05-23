@@ -7,7 +7,7 @@
 
 [appserver]
 172.31.19.196
-172.31.35.74 ansible_python_interpreter=/usr/bin/python3
+172.31.35.74 ansible_host=172.31.35.74  ansible_python_interpreter=/usr/bin/python3
 
 [dbserver]
 172.31.19.196

@@ -3,10 +3,10 @@
   hosts: appserver
   become: yes
   tasks:
-    - name: Fail the execution when it is not Ubuntu!!
+    - name: Fail the execution when it is not Ubuntu and CentOS!!
       fail:
-        msg: This playbook only works for ubuntu distributions. Support for other distribution will be added soon.
-      when: ansible_distribution != "Ubuntu"
+        msg: This playbook only works for ubuntu and centos distributions. Support for other distribution will be added soon.
+      when: ansible_facts['distribution'] != "Ubuntu" and ansible_facts['distribution'] != CentOS
     - name: Updating the packages and installing java
       apt:
         name: "{{ java_package }}"
@@ -14,6 +14,14 @@
         state: present
       notify:
         - debug message for java
+      when: ansible_facts['distribution'] == "Ubuntu"
+
+    - name: Install java on CentOS
+      apt:
+        name: "{{ java_package }}"
+        state: present
+      when: ansible_facts['distribution'] == "CentOS"  
+      
     - name: Creating a Springpetclinic direcrtory
       file:
         path: "{{ app_dir }}"
@@ -45,7 +53,7 @@
         name: springpetclinic.service
         enabled: yes
         state: started
-        
+
   handlers:
     - name: Change the Ownership of the file
       file:

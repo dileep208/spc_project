@@ -12,13 +12,13 @@
         name: "{{ java_package }}"
         update_cache: yes
         state: present
-    - notify:
+      notify:
         - debug message for java
     - name: Creating a Springpetclinic direcrtory
       file:
         path: "{{ app_dir }}"
         state: directory
-    - notify:
+      notify:
         - debug message for directory creation
     - name: Downloading the springpetclinic application
       get_url:
@@ -29,7 +29,7 @@
         name: "{{ app_username }}"
         password: "{{ app_username }}"
         state: present
-    - notify:
+      notify:
         - Change the Ownership of the file
     - name: Chage the Ownership of the file
       file:

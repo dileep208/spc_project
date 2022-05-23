@@ -1,7 +1,9 @@
 [ubuntu]
 172.31.19.196
 
-[centos]
+[amazonlinux]
+172.31.35.74
+
 
 [appserver]
 172.31.19.196

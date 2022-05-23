@@ -31,7 +31,7 @@
         name: "{{ app_username }}"
         password: "{{ app_username }}"
         state: present
-        
+
       notify:
         - Change the Ownership of the file
     
@@ -39,11 +39,13 @@
       copy:
         dest: /etc/systemd/system/springpetclinic.service
         src: springpetclinic.service
+
     - name: for enabling and starting the application
       systemd:
         name: springpetclinic.service
         enabled: yes
         state: started
+        
   handlers:
     - name: Change the Ownership of the file
       file:

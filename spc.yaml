@@ -20,23 +20,21 @@
         state: directory
       notify:
         - debug message for directory creation
+
     - name: Downloading the springpetclinic application
       get_url:
         url: "{{  app_download_url }}"
         dest: "{{ app_filename }}"
+
     - name: Creating a Springbootuser
       user:
         name: "{{ app_username }}"
         password: "{{ app_username }}"
         state: present
+        
       notify:
         - Change the Ownership of the file
-    - name: Chage the Ownership of the file
-      file:
-        path: "{{ app_filename }}"
-        owner: "{{ app_username }}"
-        mode: '500'
-        state: file
+    
     - name: copying the service file
       copy:
         dest: /etc/systemd/system/springpetclinic.service

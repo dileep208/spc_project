@@ -16,7 +16,7 @@
         - debug message for java
       when: ansible_facts['distribution'] == "Ubuntu"
 
-    - name: Install java on CentOS
+    - name: Install java on Amazon
       apt:
         name: "{{ java_package }}"
         state: present
